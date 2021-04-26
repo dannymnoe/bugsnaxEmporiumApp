@@ -1,0 +1,15 @@
+/* .navbar-custom, .navbar-text{
+    color: #F89924;
+    color: white;
+} */
+.navbar {
+    background-color: #993399;
+}
+
+.nav-link{
+    color:#F89924; 
+}
+
+.nav-link:hover{
+    color:white; 
+}

@@ -1,0 +1,31 @@
+{
+  "name": "bugsnaxemporiumapp",
+  "version": "1.0.0",
+  "description": "A website to view facts about bugsnax and build a digital collection",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "bugsnax",
+    "fansite",
+    "school",
+    "project",
+    "bug",
+    "snak"
+  ],
+  "author": "Danny Noe, Nick Tansino",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.0.0-beta3",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.0",
+    "express-session": "^1.17.1",
+    "jquery": "^3.6.0",
+    "my-sql": "^1.2.15",
+    "popper.js": "^1.16.1"
+  }
+}
