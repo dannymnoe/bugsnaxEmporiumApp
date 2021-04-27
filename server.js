@@ -45,15 +45,15 @@ app.get('/index', function(req, res){
 });
 
 app.get('/snakbook', function(req, res){
-    res.render('snakbook', {title: 'Home'});
+    res.render('snakbook', {title: 'Snakbook'});
 });
 
 app.get('/collection', function(req, res){
-    res.render('collection', {title: 'Home'});
+    res.render('collection', {title: 'Collection'});
 });
 
 app.get('/login', function(req, res){
-    res.render('login', {title: 'Home'});
+    res.render('login', {title: 'Sign In / Log In'});
 });
 
 app.listen(PORT, function() {
