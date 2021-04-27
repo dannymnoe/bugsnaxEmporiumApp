@@ -18,8 +18,15 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({secret:"my-key-is-BASED", resave: true, saveUninitialized: false}));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
-app.use(express.static('views/img/'));
-app.use(express.static('views'));
+
+// Look for static files
+app.use(express.static('views/'));
+app.use(express.static('assets/'));
+app.use(express.static('assets/css/'));
+app.use(express.static('assets/img/'));
+app.use(express.static('assets/js/'));
+app.use(express.static('assets/vendor/'));
+
 
 const path = require('path');
 
@@ -28,9 +35,6 @@ app.set('view engine', 'handlebars');
 
 //Define our port #
 const PORT = process.env.PORT || 5000;
-
-// Look for static files
-app.use(express.static('views'));
 
 app.get('/', function(req, res){
     res.render('index', {title: 'Home'});
