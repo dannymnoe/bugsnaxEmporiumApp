@@ -16,16 +16,15 @@
                     <h3>Register</h3>
                 </div>
                 <form action="/tryRegister" method="post" class="account-form">
-                    {{!-- User's Name --}}
+                    {{!-- User's Real Name --}}
                     <div class="form-group mt-3">
                         <label for="real_name_register">Name</label>
                         <input type="text" name="real_name_register" class="form-control" id="real_name_register" placeholder="Your Name" required minlength="3" maxlength="20">
                     </div>
-                    {{!-- Email --}}
+                    {{!-- Usernname --}}
                     <div class="form-group mt-3">
-                        <label for="email_register">Email address</label>
-                        <input type="email" class="form-control" name="email_register" id="email_register" placeholder="email@example.com" required minlength="3" maxlength="20">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <label for="username_register">Username</label>
+                        <input type="text" class="form-control" name="username_register" id="username_register" placeholder="Username" required minlength="3" maxlength="20">
                     </div>
                     {{!-- Password --}}
                     <div class="form-group mt-3">
@@ -38,7 +37,7 @@
                         <div class="error-message"></div>
                         <div class="sent-message">Your message has been sent. Thank you!</div>
                     </div>
-                    <div ><button type="submit">Create Account</button></div>
+                    <div ><button type="submit">Sign Up</button></div>
                 </form>
             </div>
             
@@ -49,11 +48,10 @@
                 <h3>Log In</h3>
                 </div>
                 <form action="/tryLogIn" method="post" class="account-form">
-                    {{!-- Email --}}
+                    {{!-- Usernname --}}
                     <div class="form-group mt-3">
-                        <label for="email_login">Email address</label>
-                        <input type="email" class="form-control" name="email_login" id="email_login" placeholder="email@example.com" required minlength="3" maxlength="20">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <label for="username_login">Username</label>
+                        <input type="text" class="form-control" name="username_login" id="username_login" placeholder="Username" required minlength="3" maxlength="20">
                     </div>
                     {{!-- Password --}}
                     <div class="form-group mt-3">
@@ -66,7 +64,7 @@
                         <div class="error-message"></div>
                         <div class="sent-message">Your message has been sent. Thank you!</div>
                     </div>
-                    <div ><button type="submit">Create Account</button></div>
+                    <div ><button type="submit">Sign In</button></div>
                 </form>
             </div>
             
