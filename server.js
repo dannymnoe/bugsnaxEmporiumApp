@@ -56,6 +56,31 @@ app.get('/login', function(req, res){
     res.render('login', {title: 'Sign In / Log In'});
 });
 
+app.post('/tryRegister', function(req, res) {
+    // console.log('Got body for Register:', req.body);
+    // console.log(req.sessionID);
+    // console.log(req.session.id);
+    const reg_json = req.body;
+    console.log(reg_json);
+    res.render('registered.handlebars', {title: 'Registered', 
+    username : reg_json.real_name_register, 
+    email : reg_json.email_register,
+    password: reg_json.password_register});
+});
+
+app.post('/tryLogIn', function(req, res) {
+    // console.log('Got body for Register:', req.body);
+    // console.log(req.sessionID);
+    // console.log(req.session.id);
+    const reg_json = req.body;
+    console.log(reg_json);
+    res.render('registered.handlebars', {title: 'Registered', 
+    username : reg_json.real_name_register, 
+    email : reg_json.email_login,
+    password: reg_json.password_login});
+});
+
+
 app.listen(PORT, function() {
     console.log(`Final Project app listening at http://localhost:${PORT}`)
 });

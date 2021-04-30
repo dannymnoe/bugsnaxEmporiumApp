@@ -3,8 +3,8 @@
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-            <h2>Sign In</h2>
-            <p>To start your own Bugsnax collection please sign up!</p>
+            <h2>Sign Up or Sign In</h2>
+            <p>To start your own Bugsnax collection please sign up, buddy!</p>
             <p>If you already have an account, please sign in.</p>
         </div>
 
@@ -15,60 +15,62 @@
                     <i class="bx bx-map"></i>
                     <h3>Register</h3>
                 </div>
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                    <div class="row">
-                    <div class="col-md-6 form-group">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="col-md-6 form-group mt-3 mt-md-0">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                    </div>
-                    </div>
+                <form action="/tryRegister" method="post" class="account-form">
+                    {{!-- User's Name --}}
                     <div class="form-group mt-3">
-                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                        <label for="real_name_register">Name</label>
+                        <input type="text" name="real_name_register" class="form-control" id="real_name_register" placeholder="Your Name" required minlength="3" maxlength="20">
                     </div>
+                    {{!-- Email --}}
                     <div class="form-group mt-3">
-                    <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                        <label for="email_register">Email address</label>
+                        <input type="email" class="form-control" name="email_register" id="email_register" placeholder="email@example.com" required minlength="3" maxlength="20">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    {{!-- Password --}}
+                    <div class="form-group mt-3">
+                        <label for="password_register">Password</label>
+                        <input type="password" class="form-control" id="password_register" name="password_register" placeholder="Password" required minlength="3" maxlength="20">
+                        <small id="emailHelp" class="form-text text-muted">Note: This website is for a school project! Do <b>NOT</b> use a password you regularly use!</small>
                     </div>
                     <div class="my-3">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Your message has been sent. Thank you!</div>
                     </div>
-                    <div class="text-center"><button type="submit">Send Message</button></div>
+                    <div ><button type="submit">Create Account</button></div>
                 </form>
             </div>
-
+            
             {{!-- Log In Form --}}
             <div class="col-lg-6">
                 <div class="info-box mb-4">
                 <i class="bx bx-map"></i>
                 <h3>Log In</h3>
                 </div>
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                    <div class="row">
-                    <div class="col-md-6 form-group">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="col-md-6 form-group mt-3 mt-md-0">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                    </div>
-                    </div>
+                <form action="/tryLogIn" method="post" class="account-form">
+                    {{!-- Email --}}
                     <div class="form-group mt-3">
-                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                        <label for="email_login">Email address</label>
+                        <input type="email" class="form-control" name="email_login" id="email_login" placeholder="email@example.com" required minlength="3" maxlength="20">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
+                    {{!-- Password --}}
                     <div class="form-group mt-3">
-                    <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                        <label for="password_login">Password</label>
+                        <input type="password" class="form-control" id="password_login" name="password_login" placeholder="Password" required minlength="3" maxlength="20">
+                        <small id="emailHelp" class="form-text text-muted">Note: This website is for a school project! Do <b>NOT</b> use a password you regularly use!</small>
                     </div>
                     <div class="my-3">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Your message has been sent. Thank you!</div>
                     </div>
-                    <div class="text-center"><button type="submit">Send Message</button></div>
+                    <div ><button type="submit">Create Account</button></div>
                 </form>
             </div>
             
+
         </div>
 
     </div>
