@@ -90,12 +90,23 @@ app.get('/collection', function(req, res){
             console.log(Bugsnak_collection_json);
             console.log(Bugsnak_collection_json[result[0].username]);
             var user_collection = Bugsnak_collection_json[result[0].username];
-            var count = Object.keys(user_collection).length;
-            console.log("User has this many snax", count);
+
             res.render('collection', {title: 'Collection',
                 real_name : result[0].name,
                 username : result[0].username,
-                password: result[0].password});
+                password: result[0].password,
+                snak_name0: user_collection["slot0"].snakname,
+                happy_rate0: user_collection["slot0"].happy_rate,
+                snak_name1: user_collection["slot1"].snakname,
+                happy_rate1: user_collection["slot1"].happy_rate,
+                snak_name2: user_collection["slot2"].snakname,
+                happy_rate2: user_collection["slot2"].happy_rate,
+                snak_name3: user_collection["slot3"].snakname,
+                happy_rate3: user_collection["slot3"].happy_rate,
+                snak_name4: user_collection["slot4"].snakname,
+                happy_rate4: user_collection["slot4"].happy_rate,
+                snak_name5: user_collection["slot5"].snakname,
+                happy_rate5: user_collection["slot5"].happy_rate});
         }
     });
 
