@@ -77,11 +77,25 @@ app.get('/collection', function(req, res){
             res.redirect('/login');
         }
         else {
-            res.render('collection', {title: 'Registered', 
+            const fs = require("fs");
+            // fs.readFile("Bugsnak_collections.json", function(err, data) {
+            //     if (err) throw err;
+            //     const Bugsnak_collection_json = JSON.parse(data);
+            //     console.log(Bugsnak_collection_json);
+            //     console.log(Bugsnak_collection_json.result[0].username);
+                
+                
+            // });
+            const Bugsnak_collection_json = require("./Bugsnak_collections")
+            console.log(Bugsnak_collection_json);
+            console.log(Bugsnak_collection_json[result[0].username]);
+            var user_collection = Bugsnak_collection_json[result[0].username];
+            var count = Object.keys(user_collection).length;
+            console.log("User has this many snax", count);
+            res.render('collection', {title: 'Collection', 
                 real_name : result[0].name, 
                 username : result[0].username,
                 password: result[0].password});
-            
         }
     });
 
@@ -122,11 +136,7 @@ app.get('/login', function(req, res){
             res.render('login', {title: 'Sign In / Log In'});
         }
         else {
-            res.render('collection', {title: 'Registered', 
-                real_name : result[0].name, 
-                username : result[0].username,
-                password: result[0].password});
-            
+            res.redirect('/collection');
         }
     });
 
@@ -260,11 +270,12 @@ app.post('/tryLogIn', function(req, res) {
                 }
             });
             //res.render('profile', {title: 'Profile - Lab 10', name: result[0].actual_name, username: result[0].username, password: result[0].password});
-            res.render('collection', {title: 'Registered', 
-                real_name : result[0].name, 
-                username : result[0].username,
-                password: result[0].password});
+            // res.render('collection', {title: 'Registered', 
+            //     real_name : result[0].name, 
+            //     username : result[0].username,
+            //     password: result[0].password});
             // ^ Will probably become a direct
+            res.redirect('/collection');
         }
     });
 
