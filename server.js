@@ -36,7 +36,7 @@ app.set('view engine', 'handlebars');
 const PORT = process.env.PORT || 5000;
 
 app.get('/', function(req, res){
-    
+
     res.render('index', {title: 'Home'});
 });
 
@@ -83,8 +83,8 @@ app.get('/collection', function(req, res){
             //     const Bugsnak_collection_json = JSON.parse(data);
             //     console.log(Bugsnak_collection_json);
             //     console.log(Bugsnak_collection_json.result[0].username);
-                
-                
+
+
             // });
             const Bugsnak_collection_json = require("./Bugsnak_collections")
             console.log(Bugsnak_collection_json);
@@ -92,8 +92,8 @@ app.get('/collection', function(req, res){
             var user_collection = Bugsnak_collection_json[result[0].username];
             var count = Object.keys(user_collection).length;
             console.log("User has this many snax", count);
-            res.render('collection', {title: 'Collection', 
-                real_name : result[0].name, 
+            res.render('collection', {title: 'Collection',
+                real_name : result[0].name,
                 username : result[0].username,
                 password: result[0].password});
         }
@@ -111,6 +111,15 @@ app.get('/collection', function(req, res){
 });
 
 app.get('/login', function(req, res){
+
+    //const pool = mysql.createPool({
+    //    host: '192.185.2.183',
+    //    database: 'ntansino_snakbook_login',
+    //    user: 'ntansino_admin1',
+    //    password: 'basedPassword69',
+    //    port: '3306'
+    //});
+
     const connection = mysql.createConnection({
         host: '192.185.2.183',
         database: 'ntansino_snakbook_login',
@@ -118,7 +127,7 @@ app.get('/login', function(req, res){
         password: 'basedPassword69',
         port: '3306'
     });
-    
+
 
     connection.connect(function(err) {
         if(err) {
@@ -148,7 +157,7 @@ app.get('/login', function(req, res){
             console.log("Connection End Successful");
         }
     });
-    
+
 });
 
 app.get('/logout', function(req, res){
@@ -173,7 +182,7 @@ app.post('/tryRegister', function(req, res) {
     sql += "'" + reg_json.password_register + "');";    // Password
     console.log(sql);
     sql_username_query = "SELECT * FROM user_auth WHERE username='" + reg_json.username_register + "'";
-    
+
 
     const connection = mysql.createConnection({
         host: '192.185.2.183',
@@ -182,7 +191,7 @@ app.post('/tryRegister', function(req, res) {
         password: 'basedPassword69',
         port: '3306'
     });
-    
+
 
     connection.connect(function(err) {
         if(err) {
@@ -192,8 +201,8 @@ app.post('/tryRegister', function(req, res) {
             console.log("Connection Successful");
         }
     });
-    
-    
+
+
     connection.query(sql_username_query, function(err, result) {
         if (result.length == 0) {
             // The username does not already exist so create new account
@@ -224,10 +233,10 @@ app.post('/tryLogIn', function(req, res) {
 
     // Init the session so the ID is fixed
     req.session.arb_data = 'data';
-    
+
     const reg_json = req.body;
     console.log(reg_json);
-    
+
     var sql = "SELECT * FROM user_auth WHERE username='" + reg_json.username_login + "'";
 
     const connection = mysql.createConnection({
@@ -237,7 +246,7 @@ app.post('/tryLogIn', function(req, res) {
         password: 'basedPassword69',
         port: '3306'
     });
-    
+
 
     connection.connect(function(err) {
         if(err) {
@@ -270,8 +279,8 @@ app.post('/tryLogIn', function(req, res) {
                 }
             });
             //res.render('profile', {title: 'Profile - Lab 10', name: result[0].actual_name, username: result[0].username, password: result[0].password});
-            // res.render('collection', {title: 'Registered', 
-            //     real_name : result[0].name, 
+            // res.render('collection', {title: 'Registered',
+            //     real_name : result[0].name,
             //     username : result[0].username,
             //     password: result[0].password});
             // ^ Will probably become a direct
