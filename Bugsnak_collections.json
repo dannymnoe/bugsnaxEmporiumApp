@@ -1,18 +1,28 @@
 {
-    "dummy" : {
-        "slot0" : {
-            "snakname" : "bunger",
-            "happiness" : 100
-        },
-        "slot1" : {
-            "snakname" : "shishkabug",
-            "happiness" : 100
-        }
-    },
     "Danny" : {
         "slot0" : {
             "snakname" : "bunger",
-            "happiness" : 100
+            "happy_rate" : 100
+        },
+        "slot1" : {
+            "snakname" : "Not Populated",
+            "happy_rate" : 0
+        },
+        "slot2" : {
+            "snakname" : "Not Populated",
+            "happy_rate" : 0
+        },
+        "slot3" : {
+            "snakname" : "Not Populated",
+            "happy_rate" : 0
+        },
+        "slot4" : {
+            "snakname" : "Not Populated",
+            "happy_rate" : 0
+        },
+        "slot5" : {
+            "snakname" : "Not Populated",
+            "happy_rate" : 0
         }
     }
 }
