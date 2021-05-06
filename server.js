@@ -95,17 +95,17 @@ app.get('/collection', function (req, res) {
                 username: result[0].username,
                 password: result[0].password,
                 snak_name0: user_collection["slot0"].snakname,
-                happy_rate0: user_collection["slot0"].happy_rate,
+                happy_rate0: user_collection["slot0"].img_link,
                 snak_name1: user_collection["slot1"].snakname,
-                happy_rate1: user_collection["slot1"].happy_rate,
+                happy_rate1: user_collection["slot1"].img_link,
                 snak_name2: user_collection["slot2"].snakname,
-                happy_rate2: user_collection["slot2"].happy_rate,
+                happy_rate2: user_collection["slot2"].img_link,
                 snak_name3: user_collection["slot3"].snakname,
-                happy_rate3: user_collection["slot3"].happy_rate,
+                happy_rate3: user_collection["slot3"].img_link,
                 snak_name4: user_collection["slot4"].snakname,
-                happy_rate4: user_collection["slot4"].happy_rate,
+                happy_rate4: user_collection["slot4"].img_link,
                 snak_name5: user_collection["slot5"].snakname,
-                happy_rate5: user_collection["slot5"].happy_rate
+                happy_rate5: user_collection["slot5"].img_link
             });
         }
     });
@@ -209,6 +209,18 @@ app.post('/tryLogIn', function (req, res) {
 
 });
 
+function find_empty_slot(user_collection) {
+    var empty_slot = {};
+    console.log("You are in find_empty_slot");
+    Object.entries(user_collection).forEach(entry => {
+        console.log("Next key, value pair");
+        let key = entry[0];
+        let value = entry[1];
+        console.log(key, value);
+    });
+    return empty_slot;
+}
+
 app.post('/addSnak', function(req, res){
     const reqBODY = req.body;
     console.log(reqBODY);
@@ -223,14 +235,14 @@ app.post('/addSnak', function(req, res){
         else {
             
             const Bugsnak_collection_json = require("./Bugsnak_collections")
-            console.log(Bugsnak_collection_json);
-            console.log(Bugsnak_collection_json[result[0].username]);
+            //console.log(Bugsnak_collection_json);
+            //console.log(Bugsnak_collection_json[result[0].username]);
             var user_collection = Bugsnak_collection_json[result[0].username];
-
+            var empty_slot = find_empty_slot(user_collection);
             res.redirect('/collection');
         }
     });
-    //res.send("OK");
+    
 });
 
 app.listen(PORT, function () {
