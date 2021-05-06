@@ -12,10 +12,10 @@ const session = require('express-session');
 
 // Create express app
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({secret:"my-key-is-BASED", resave: true, saveUninitialized: false}));
+app.use(session({ secret: "my-key-is-BASED", resave: true, saveUninitialized: false }));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 // Look for static files
@@ -29,7 +29,7 @@ app.use(express.static('assets/vendor/'));
 
 const path = require('path');
 
-app.engine('handlebars', expbs({ defaultLayout: 'main'}));
+app.engine('handlebars', expbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 //Define our port #
@@ -43,8 +43,8 @@ const connection = mysql.createConnection({
     port: '3306'
 });
 
-connection.connect(function(err) {
-    if(err) {
+connection.connect(function (err) {
+    if (err) {
         console.log("Connection Error: " + err);
     }
     else {
@@ -52,27 +52,26 @@ connection.connect(function(err) {
     }
 });
 
-app.get('/', function(req, res){
-    res.render('index', {title: 'Home'});
+app.get('/', function (req, res) {
+    res.render('index', { title: 'Home' });
 });
 
-app.get('/index', function(req, res){
-    // Init the session so the ID is fixed
+app.get('/index', function (req, res) {
     res.redirect('/');
 });
 
-app.get('/snakbook', function(req, res){
-    res.render('snakbook', {title: 'Snakbook'});
+app.get('/snakbook', function (req, res) {
+    res.render('snakbook', { title: 'Snakbook' });
 });
 
-app.get('/collection', function(req, res){
+app.get('/collection', function (req, res) {
     //res.render('collection', {title: 'Collection'});
 
     console.log(req.session.id);
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
     connection.query(sql, function (err, result) {
         if (err) throw err;
-        if (result.length == 0){
+        if (result.length == 0) {
             res.redirect('/login');
         }
         else {
@@ -82,17 +81,18 @@ app.get('/collection', function(req, res){
             //     const Bugsnak_collection_json = JSON.parse(data);
             //     console.log(Bugsnak_collection_json);
             //     console.log(Bugsnak_collection_json.result[0].username);
-                
-                
+
+
             // });
             const Bugsnak_collection_json = require("./Bugsnak_collections")
             console.log(Bugsnak_collection_json);
             console.log(Bugsnak_collection_json[result[0].username]);
             var user_collection = Bugsnak_collection_json[result[0].username];
-            
-            res.render('collection', {title: 'Collection', 
-                real_name : result[0].name, 
-                username : result[0].username,
+
+            res.render('collection', {
+                title: 'Collection',
+                real_name: result[0].name,
+                username: result[0].username,
                 password: result[0].password,
                 snak_name0: user_collection["slot0"].snakname,
                 happy_rate0: user_collection["slot0"].happy_rate,
@@ -105,19 +105,20 @@ app.get('/collection', function(req, res){
                 snak_name4: user_collection["slot4"].snakname,
                 happy_rate4: user_collection["slot4"].happy_rate,
                 snak_name5: user_collection["slot5"].snakname,
-                happy_rate5: user_collection["slot5"].happy_rate});
+                happy_rate5: user_collection["slot5"].happy_rate
+            });
         }
     });
 
 });
 
-app.get('/login', function(req, res){
-    
+app.get('/login', function (req, res) {
+
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
     connection.query(sql, function (err, result) {
         if (err) throw err;
-        if (result.length == 0){
-            res.render('login', {title: 'Sign In / Log In'});
+        if (result.length == 0) {
+            res.render('login', { title: 'Sign In / Log In' });
         }
         else {
             res.redirect('/collection');
@@ -125,14 +126,14 @@ app.get('/login', function(req, res){
     });
 });
 
-app.get('/logout', function(req, res){
-    req.session.destroy(function(){
+app.get('/logout', function (req, res) {
+    req.session.destroy(function () {
         // console.log("User logged out");
     });
     res.redirect('/');
 });
 
-app.post('/tryRegister', function(req, res) {
+app.post('/tryRegister', function (req, res) {
     const reg_json = req.body;
     console.log(reg_json);
 
@@ -146,49 +147,49 @@ app.post('/tryRegister', function(req, res) {
     sql += "'" + reg_json.password_register + "');";    // Password
     console.log(sql);
     sql_username_query = "SELECT * FROM user_auth WHERE username='" + reg_json.username_register + "'";
-    
-    connection.query(sql_username_query, function(err, result) {
+
+    connection.query(sql_username_query, function (err, result) {
         if (result.length == 0) {
             // The username does not already exist so create new account
-            connection.query(sql, function(err, result) {
+            connection.query(sql, function (err, result) {
                 if (err) throw err;
                 res.redirect('collection');
             });
         }
         else {
             // Username is taken
-            res.render('redirect', {title: 'Username Taken', msg: 'The username you entered is registered already'});
+            res.render('redirect', { title: 'Username Taken', msg: 'The username you entered is registered already' });
             console.log("Username taken");
         }
     });
 
 });
 
-app.post('/tryLogIn', function(req, res) {
+app.post('/tryLogIn', function (req, res) {
 
     // Init the session so the ID is fixed
     req.session.arb_data = 'data';
-    
+
     const reg_json = req.body;
     console.log(reg_json);
-    
+
     var sql = "SELECT * FROM user_auth WHERE username='" + reg_json.username_login + "'";
 
     connection.query(sql, function (err, result) {
         if (err) throw err;
         console.log(result);
-        if (result.length == 0){
+        if (result.length == 0) {
             console.log("Username not found");
-            res.render('redirect', {title: 'Username Not Registered', msg: 'The username you entered is has not yet been registered.'});
+            res.render('redirect', { title: 'Username Not Registered', msg: 'The username you entered is has not yet been registered.' });
         }
-        
-        else if (reg_json.password_login != result[0].password){
+
+        else if (reg_json.password_login != result[0].password) {
             console.log("Password not found");
-            res.render('redirect', {title: 'Incorrect Password', msg: 'The password you entered is not correct.'});
+            res.render('redirect', { title: 'Incorrect Password', msg: 'The password you entered is not correct.' });
         }
         else {
             sql_update = "UPDATE user_auth SET sessionID = '" + req.session.id + "' WHERE username = '" + reg_json.username_login + "'";
-            connection.query(sql_update, function(err, result){
+            connection.query(sql_update, function (err, result) {
                 if (err) throw err;
                 else {
                     console.log("SessionID should have been updated");
@@ -208,7 +209,30 @@ app.post('/tryLogIn', function(req, res) {
 
 });
 
+app.post('/addSnak', function(req, res){
+    const reqBODY = req.body;
+    console.log(reqBODY);
 
-app.listen(PORT, function() {
+    var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
+    connection.query(sql, function (err, result) {
+        if (err) throw err;
+        if (result.length == 0) {
+
+            return res.redirect('/login');
+        }
+        else {
+            
+            const Bugsnak_collection_json = require("./Bugsnak_collections")
+            console.log(Bugsnak_collection_json);
+            console.log(Bugsnak_collection_json[result[0].username]);
+            var user_collection = Bugsnak_collection_json[result[0].username];
+
+            res.redirect('/collection');
+        }
+    });
+    //res.send("OK");
+});
+
+app.listen(PORT, function () {
     console.log(`Final Project app listening at http://localhost:${PORT}`)
 });

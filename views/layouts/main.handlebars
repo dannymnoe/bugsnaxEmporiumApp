@@ -151,5 +151,30 @@
 
     <!-- Template Main JS File -->
     <script src="main.js"></script>
+
+    <script>
+        function addSnak(snak_id, img_path) {
+            const options = {
+                method: 'POST',
+                redirect: 'follow',
+                body: JSON.stringify({snak_id, img_path}),
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            };
+            fetch('/addSnak', options)
+                .then(response => {
+                    // HTTP 301 response
+                    console.log(response)
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    }
+                })
+                .catch(function(err) {
+                    console.info(err + " url: " + url);
+                });
+                
+        }
+    </script>
 </body>
 </html>
