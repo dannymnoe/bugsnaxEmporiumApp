@@ -2,34 +2,34 @@
     "Danny" : {
         "slot0" : {
             "img_link" : "bugsnax/bunger_collection.webp",
-            "snakname" : "bunger",
-            "slotFull" : true
+            "snakname" : "Bunger",
+            "slotAvailable" : false
         },
         "slot1" : {
             "img_link" : "bugsnax/empty_slot.png",
             "snakname" : "Not Populated",
-            "slotFull" : false
+            "slotAvailable" : false
         },
         "slot2" : {
             "img_link" : "bugsnax/empty_slot.png",
             "snakname" : "Not Populated",
-            "slotFull" : false
+            "slotAvailable" : false
         },
         "slot3" : {
             "img_link" : "bugsnax/empty_slot.png",
             "snakname" : "Not Populated",
-            "slotFull" : false
+            "slotAvailable" : false
         },
         "slot4" : {
             "img_link" : "bugsnax/empty_slot.png",
             "snakname" : "Not Populated",
-            "slotFull" : false
+            "slotAvailable" : false
         },
         "slot5" : {
             "img_link" : "bugsnax/empty_slot.png",
             "snakname" : "Not Populated",
-            "slotFull" : false
+            "slotAvailable" : false
         },
-        "bagFull": false
+        "roomAvailable": true
     }
 }
