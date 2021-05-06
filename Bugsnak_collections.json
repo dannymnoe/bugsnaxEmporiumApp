@@ -1,28 +1,28 @@
 {
     "Danny" : {
         "slot0" : {
-            "snakname" : "bunger",
+            "snakname" : "Bunger",
             "happy_rate" : 100
         },
         "slot1" : {
-            "snakname" : "Not Populated",
-            "happy_rate" : 0
+            "snakname" : "Aggroll",
+            "happy_rate" : 100
         },
         "slot2" : {
-            "snakname" : "Not Populated",
-            "happy_rate" : 0
+            "snakname" : "Big Bopsicle",
+            "happy_rate" : 100
         },
         "slot3" : {
-            "snakname" : "Not Populated",
-            "happy_rate" : 0
+            "snakname" : "Cinnasnail",
+            "happy_rate" : 100
         },
         "slot4" : {
-            "snakname" : "Not Populated",
-            "happy_rate" : 0
+            "snakname" : "Chillynilly",
+            "happy_rate" : 100
         },
         "slot5" : {
-            "snakname" : "Not Populated",
-            "happy_rate" : 0
+            "snakname" : "Pineantula",
+            "happy_rate" : 100
         }
     }
 }
