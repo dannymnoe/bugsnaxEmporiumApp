@@ -35,8 +35,24 @@ app.set('view engine', 'handlebars');
 //Define our port #
 const PORT = process.env.PORT || 5000;
 
+const connection = mysql.createConnection({
+    host: '192.185.2.183',
+    database: 'ntansino_snakbook_login',
+    user: 'ntansino_admin1',
+    password: 'basedPassword69',
+    port: '3306'
+});
+
+connection.connect(function(err) {
+    if(err) {
+        console.log("Connection Error: " + err);
+    }
+    else {
+        console.log("Connection Successful");
+    }
+});
+
 app.get('/', function(req, res){
-    
     res.render('index', {title: 'Home'});
 });
 
@@ -51,23 +67,6 @@ app.get('/snakbook', function(req, res){
 
 app.get('/collection', function(req, res){
     //res.render('collection', {title: 'Collection'});
-
-    const connection = mysql.createConnection({
-        host: '192.185.2.183',
-        database: 'ntansino_snakbook_login',
-        user: 'ntansino_admin1',
-        password: 'basedPassword69',
-        port: '3306'
-    });
-
-    connection.connect(function(err) {
-        if(err) {
-            console.log("Connection Error: " + err);
-        }
-        else {
-            console.log("Connection Successful");
-        }
-    });
 
     console.log(req.session.id);
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
@@ -110,36 +109,10 @@ app.get('/collection', function(req, res){
         }
     });
 
-    connection.end(function(err) {
-        if(err) {
-            console.log("Disconnect error: " + err);
-        }
-        else {
-            console.log("Connection End Successful");
-        }
-    });
-
 });
 
 app.get('/login', function(req, res){
-    const connection = mysql.createConnection({
-        host: '192.185.2.183',
-        database: 'ntansino_snakbook_login',
-        user: 'ntansino_admin1',
-        password: 'basedPassword69',
-        port: '3306'
-    });
     
-
-    connection.connect(function(err) {
-        if(err) {
-            console.log("Connection Error: " + err);
-        }
-        else {
-            console.log("Connection Successful");
-        }
-    });
-
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
     connection.query(sql, function (err, result) {
         if (err) throw err;
@@ -150,16 +123,6 @@ app.get('/login', function(req, res){
             res.redirect('/collection');
         }
     });
-
-    connection.end(function(err) {
-        if(err) {
-            console.log("Disconnect error: " + err);
-        }
-        else {
-            console.log("Connection End Successful");
-        }
-    });
-    
 });
 
 app.get('/logout', function(req, res){
@@ -173,7 +136,6 @@ app.post('/tryRegister', function(req, res) {
     const reg_json = req.body;
     console.log(reg_json);
 
-
     // Init the session so the ID is fixed
     req.session.arb_data = 'data';
 
@@ -184,26 +146,6 @@ app.post('/tryRegister', function(req, res) {
     sql += "'" + reg_json.password_register + "');";    // Password
     console.log(sql);
     sql_username_query = "SELECT * FROM user_auth WHERE username='" + reg_json.username_register + "'";
-    
-
-    const connection = mysql.createConnection({
-        host: '192.185.2.183',
-        database: 'ntansino_snakbook_login',
-        user: 'ntansino_admin1',
-        password: 'basedPassword69',
-        port: '3306'
-    });
-    
-
-    connection.connect(function(err) {
-        if(err) {
-            console.log("Connection Error: " + err);
-        }
-        else {
-            console.log("Connection Successful");
-        }
-    });
-    
     
     connection.query(sql_username_query, function(err, result) {
         if (result.length == 0) {
@@ -220,15 +162,6 @@ app.post('/tryRegister', function(req, res) {
         }
     });
 
-    // connection.end(function(err) {
-    //     if(err) {
-    //         console.log("Disconnect error: " + err);
-    //     }
-    //     else {
-    //         console.log("Connection End Successful");
-    //     }
-    // });
-
 });
 
 app.post('/tryLogIn', function(req, res) {
@@ -241,24 +174,6 @@ app.post('/tryLogIn', function(req, res) {
     
     var sql = "SELECT * FROM user_auth WHERE username='" + reg_json.username_login + "'";
 
-    const connection = mysql.createConnection({
-        host: '192.185.2.183',
-        database: 'ntansino_snakbook_login',
-        user: 'ntansino_admin1',
-        password: 'basedPassword69',
-        port: '3306'
-    });
-    
-
-    connection.connect(function(err) {
-        if(err) {
-            console.log("Connection Error: " + err);
-        }
-        else {
-            console.log("Connection Successful");
-        }
-    });
-
     connection.query(sql, function (err, result) {
         if (err) throw err;
         console.log(result);
@@ -266,7 +181,7 @@ app.post('/tryLogIn', function(req, res) {
             console.log("Username not found");
             res.render('redirect', {title: 'Username Not Registered', msg: 'The username you entered is has not yet been registered.'});
         }
-        //console.log(result[0].actual_name + " " + result[0].username + " " + result[0].password);
+        
         else if (reg_json.password_login != result[0].password){
             console.log("Password not found");
             res.render('redirect', {title: 'Incorrect Password', msg: 'The password you entered is not correct.'});
@@ -287,17 +202,9 @@ app.post('/tryLogIn', function(req, res) {
             //     password: result[0].password});
             // ^ Will probably become a direct
             res.redirect('/collection');
+
         }
     });
-
-    // connection.end(function(err) {
-    //     if(err) {
-    //         console.log("Disconnect error: " + err);
-    //     }
-    //     else {
-    //         console.log("Connection End Successful");
-    //     }
-    // });
 
 });
 
