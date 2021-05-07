@@ -79,7 +79,7 @@ function fresh_new_bag() {
 }
 
 app.get('/', function (req, res) {
-    res.render('index', { title: 'Home' });
+    res.render('index', { title: 'Home - Bugsnax Emporium' });
 });
 
 app.get('/index', function (req, res) {
@@ -87,7 +87,7 @@ app.get('/index', function (req, res) {
 });
 
 app.get('/snakbook', function (req, res) {
-    res.render('snakbook', { title: 'Snakbook' });
+    res.render('snakbook', { title: 'Snakbook - Bugsnax Emporium' });
 });
 
 app.get('/collection', function (req, res) {
@@ -105,7 +105,7 @@ app.get('/collection', function (req, res) {
             var user_collection = Bugsnak_collection_json[result[0].username];
 
             res.render('collection', {
-                title: 'Collection',
+                title: 'Collection - Bugsnax Emporium',
                 real_name: result[0].name,
                 username: result[0].username,
                 password: result[0].password,
@@ -133,7 +133,7 @@ app.get('/login', function (req, res) {
     connection_pool.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length == 0) {
-            res.render('login', { title: 'Sign In / Log In' });
+            res.render('login', { title: 'Sign In / Log In - Bugsnax Emporium' });
         }
         else {
             res.redirect('/collection');
@@ -149,7 +149,7 @@ app.get('/logout', function (req, res) {
 });
 
 app.get('/bagfull', function (req, res) {
-    res.render('bagfull', { title: 'Bag is Full!' });
+    res.render('bagfull', { title: 'Bag is Full! - Bugsnax Emporium' });
 });
 
 app.post('/tryRegister', function (req, res) {
@@ -182,7 +182,7 @@ app.post('/tryRegister', function (req, res) {
         }
         else {
             // Username is taken
-            res.render('redirect', { title: 'Username Taken', msg: 'The username you entered is registered already' });
+            res.render('redirect', { title: 'Username Taken - Bugsnax Emporium', msg: 'The username you entered is registered already' });
         }
     });
 
@@ -200,11 +200,11 @@ app.post('/tryLogIn', function (req, res) {
     connection_pool.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length == 0) {
-            res.render('redirect', { title: 'Username Not Registered', msg: 'The username you entered is has not yet been registered.' });
+            res.render('redirect', { title: 'Username Not Registered - Bugsnax Emporium', msg: 'The username you entered is has not yet been registered.' });
         }
 
         else if (reg_json.password_login != result[0].password) {
-            res.render('redirect', { title: 'Incorrect Password', msg: 'The password you entered is not correct.' });
+            res.render('redirect', { title: 'Incorrect Password - Bugsnax Emporium', msg: 'The password you entered is not correct.' });
         }
         else {
             sql_update = "UPDATE user_auth SET sessionID = '" + req.session.id + "' WHERE username = '" + reg_json.username_login + "'";
@@ -337,7 +337,7 @@ app.post('/empty_bag', function (req, res) {
 });
 
 app.get('/*', function (req, res) {
-    res.render('404', { title: '404: Page Not Found' });
+    res.render('404', { title: '404: Page Not Found - Bugsnax Emporium' });
 });
 
 app.listen(PORT, function () {
