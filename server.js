@@ -54,38 +54,40 @@ connection.connect(function (err) {
 
 //var Bugsnak_collection_json = require("./Bugsnak_collections");
 
-const new_bag = {
-    "slot0": {
-        "img_link": "bugsnax/empty_slot.png",
-        "snakname": "Not Populated",
-        "slotAvailable": true
-    },
-    "slot1": {
-        "img_link": "bugsnax/empty_slot.png",
-        "snakname": "Not Populated",
-        "slotAvailable": true
-    },
-    "slot2": {
-        "img_link": "bugsnax/empty_slot.png",
-        "snakname": "Not Populated",
-        "slotAvailable": true
-    },
-    "slot3": {
-        "img_link": "bugsnax/empty_slot.png",
-        "snakname": "Not Populated",
-        "slotAvailable": true
-    },
-    "slot4": {
-        "img_link": "bugsnax/empty_slot.png",
-        "snakname": "Not Populated",
-        "slotAvailable": true
-    },
-    "slot5": {
-        "img_link": "bugsnax/empty_slot.png",
-        "snakname": "Not Populated",
-        "slotAvailable": true
-    }
-};
+function fresh_new_bag() {
+    return {
+        "slot0": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot1": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot2": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot3": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot4": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot5": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        }
+    };
+}
 
 app.get('/', function (req, res) {
     res.render('index', { title: 'Home' });
@@ -100,9 +102,7 @@ app.get('/snakbook', function (req, res) {
 });
 
 app.get('/collection', function (req, res) {
-    //res.render('collection', {title: 'Collection'});
 
-    //console.log(req.session.id);
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
     connection.query(sql, function (err, result) {
         if (err) throw err;
@@ -110,9 +110,6 @@ app.get('/collection', function (req, res) {
             res.redirect('/login');
         }
         else {
-
-            // console.log(Bugsnak_collection_json);
-            // console.log(Bugsnak_collection_json[result[0].username]);
 
             var Bugsnak_collection_json = require("./Bugsnak_collections");
 
@@ -168,7 +165,6 @@ app.get('/bagfull', function (req, res) {
 
 app.post('/tryRegister', function (req, res) {
     const reg_json = req.body;
-    console.log(reg_json);
 
     // Init the session so the ID is fixed
     req.session.arb_data = 'data';
@@ -178,14 +174,14 @@ app.post('/tryRegister', function (req, res) {
     sql += "'" + reg_json.real_name_register + "',";    // Real Name
     sql += "'" + reg_json.username_register + "',";     // User Name
     sql += "'" + reg_json.password_register + "');";    // Password
-    console.log(sql);
+
     sql_username_query = "SELECT * FROM user_auth WHERE username='" + reg_json.username_register + "'";
 
     connection.query(sql_username_query, function (err, result) {
         if (result.length == 0) {
             // The username does not already exist so create new account
             var Bugsnak_collection_json = require("./Bugsnak_collections");
-            Bugsnak_collection_json[reg_json.username_register] = new_bag;
+            Bugsnak_collection_json[reg_json.username_register] = fresh_new_bag();
             const fs = require("fs");
             let collect_str = JSON.stringify(Bugsnak_collection_json);
             fs.writeFileSync('./Bugsnak_collections.json', collect_str);
@@ -198,7 +194,6 @@ app.post('/tryRegister', function (req, res) {
         else {
             // Username is taken
             res.render('redirect', { title: 'Username Taken', msg: 'The username you entered is registered already' });
-            console.log("Username taken");
         }
     });
 
@@ -210,20 +205,16 @@ app.post('/tryLogIn', function (req, res) {
     req.session.arb_data = 'data';
 
     const reg_json = req.body;
-    console.log(reg_json);
 
     var sql = "SELECT * FROM user_auth WHERE username='" + reg_json.username_login + "'";
 
     connection.query(sql, function (err, result) {
         if (err) throw err;
-        console.log(result);
         if (result.length == 0) {
-            console.log("Username not found");
             res.render('redirect', { title: 'Username Not Registered', msg: 'The username you entered is has not yet been registered.' });
         }
 
         else if (reg_json.password_login != result[0].password) {
-            console.log("Password not found");
             res.render('redirect', { title: 'Incorrect Password', msg: 'The password you entered is not correct.' });
         }
         else {
@@ -231,11 +222,9 @@ app.post('/tryLogIn', function (req, res) {
             connection.query(sql_update, function (err, result) {
                 if (err) throw err;
                 else {
-                    console.log("SessionID should have been updated");
-                    console.log("SID in app post /profile : " + req.session.id + " username: " + reg_json.username_login);
+                    res.redirect('/collection');
                 }
             });
-            res.redirect('/collection');
 
         }
     });
@@ -246,8 +235,9 @@ function find_empty_slot(user_collection) {
     // Given a user_collection JSON object
     // Return the empty slot as a str, if available
     // Returns "full" if the user's bag is full
+
     var empty_slot = "full";
-    console.log("You are in find_empty_slot");
+
     var found_slot = false;
     Object.entries(user_collection).forEach(entry => {
         let slot_str = entry[0];
@@ -255,10 +245,8 @@ function find_empty_slot(user_collection) {
         if (slot_json.slotAvailable && !found_slot) {
             empty_slot = slot_str;
             found_slot = true;
-            console.log("Found empty slot" + slot_json);
         }
     });
-    console.log(empty_slot);
     return empty_slot;
 }
 
@@ -271,7 +259,6 @@ app.post('/addSnak', function (req, res) {
         "snakname": req.body.snak_id,
         "slotAvailable": false
     };
-    console.log(new_slot);
 
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
 
@@ -286,14 +273,10 @@ app.post('/addSnak', function (req, res) {
             var user_collection = Bugsnak_collection_json[result[0].username];
             var empty_slot = find_empty_slot(user_collection);
             if (empty_slot == "full") {
-                console.log("Inventory is full");
                 res.redirect('/bagfull');
             }
             else {
-                console.log("Space available");
-                console.log(user_collection[empty_slot]);
                 user_collection[empty_slot] = new_slot;
-                console.log(user_collection[empty_slot]);
 
                 const fs = require("fs");
                 let collect_str = JSON.stringify(Bugsnak_collection_json);
@@ -306,6 +289,41 @@ app.post('/addSnak', function (req, res) {
 
 });
 
+function fresh_new_bag() {
+    return {
+        "slot0": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot1": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot2": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot3": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot4": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot5": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        }
+    };
+}
+
 app.post('/empty_bag', function (req, res) {
 
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
@@ -316,10 +334,11 @@ app.post('/empty_bag', function (req, res) {
             return res.redirect('/login');
         }
         else {
+
             var Bugsnak_collection_json = require("./Bugsnak_collections");
-            console.log(Bugsnak_collection_json[result[0].username])
-            Bugsnak_collection_json[result[0].username] = new_bag;
-            console.log(Bugsnak_collection_json[result[0].username])
+
+            Bugsnak_collection_json[result[0].username] = fresh_new_bag();
+
             const fs = require("fs");
             let collect_str = JSON.stringify(Bugsnak_collection_json);
             fs.writeFileSync('./Bugsnak_collections.json', collect_str);
@@ -329,7 +348,7 @@ app.post('/empty_bag', function (req, res) {
 });
 
 app.get('/*', function (req, res) {
-    res.render('404', {title: '404: Page Not Found'});
+    res.render('404', { title: '404: Page Not Found' });
 });
 
 app.listen(PORT, function () {
