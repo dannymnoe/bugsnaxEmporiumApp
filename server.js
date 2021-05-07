@@ -163,7 +163,7 @@ app.get('/logout', function (req, res) {
 });
 
 app.get('/bagfull', function (req, res) {
-    res.render('bagfull', {title: 'Bag is Full!'});
+    res.render('bagfull', { title: 'Bag is Full!' });
 });
 
 app.post('/tryRegister', function (req, res) {
@@ -326,6 +326,10 @@ app.post('/empty_bag', function (req, res) {
             res.redirect('/collection');
         }
     });
+});
+
+app.get('/*', function (req, res) {
+    res.render('404', {title: '404: Page Not Found'});
 });
 
 app.listen(PORT, function () {

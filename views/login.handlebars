@@ -19,55 +19,62 @@
                     {{!-- User's Real Name --}}
                     <div class="form-group mt-3">
                         <label for="real_name_register">Name</label>
-                        <input type="text" name="real_name_register" class="form-control" id="real_name_register" placeholder="Your Name" required minlength="3" maxlength="20">
+                        <input type="text" name="real_name_register" class="form-control" id="real_name_register"
+                            placeholder="Your Name" required minlength="3" maxlength="20">
                     </div>
                     {{!-- Usernname --}}
                     <div class="form-group mt-3">
                         <label for="username_register">Username</label>
-                        <input type="text" class="form-control" name="username_register" id="username_register" placeholder="Username" required minlength="3" maxlength="20">
+                        <input type="text" class="form-control" name="username_register" id="username_register"
+                            placeholder="Username" required minlength="3" maxlength="20">
                     </div>
                     {{!-- Password --}}
                     <div class="form-group mt-3">
                         <label for="password_register">Password</label>
-                        <input type="password" class="form-control" id="password_register" name="password_register" placeholder="Password" required minlength="3" maxlength="20">
-                        <small id="emailHelp" class="form-text text-muted">Note: This website is for a school project! Do <b>NOT</b> use a password you regularly use!</small>
+                        <input type="password" class="form-control" id="password_register" name="password_register"
+                            placeholder="Password" required minlength="3" maxlength="20">
+                        <small id="emailHelp" class="form-text text-muted">Note: This website is for a school project!
+                            Do <b>NOT</b> use a password you regularly use!</small>
                     </div>
                     <div class="my-3">
                         <div class="loading">Loading</div>
                         <div class="error-message"></div>
                         <div class="sent-message">Your message has been sent. Thank you!</div>
                     </div>
-                    <div ><button type="submit">Sign Up</button></div>
+                    <div><button type="submit">Sign Up</button></div>
                 </form>
             </div>
-            
+
             {{!-- Log In Form --}}
             <div class="col-lg-6">
                 <div class="info-box mb-4">
-                <i class="bx bx-map"></i>
-                <h3>Log In</h3>
+                    <i class="bx bx-map"></i>
+                    <h3>Log In</h3>
                 </div>
                 <form action="/tryLogIn" method="post" class="account-form">
                     {{!-- Usernname --}}
                     <div class="form-group mt-3">
                         <label for="username_login">Username</label>
-                        <input type="text" class="form-control" name="username_login" id="username_login" placeholder="Username" required minlength="3" maxlength="20">
+                        <input type="text" class="form-control" name="username_login" id="username_login"
+                            placeholder="Username" required minlength="3" maxlength="20">
                     </div>
                     {{!-- Password --}}
                     <div class="form-group mt-3">
                         <label for="password_login">Password</label>
-                        <input type="password" class="form-control" id="password_login" name="password_login" placeholder="Password" required minlength="3" maxlength="20">
-                        <small id="emailHelp" class="form-text text-muted">Note: This website is for a school project! Do <b>NOT</b> use a password you regularly use!</small>
+                        <input type="password" class="form-control" id="password_login" name="password_login"
+                            placeholder="Password" required minlength="3" maxlength="20">
+                        <small id="emailHelp" class="form-text text-muted">Note: This website is for a school project!
+                            Do <b>NOT</b> use a password you regularly use!</small>
                     </div>
                     <div class="my-3">
                         <div class="loading">Loading</div>
                         <div class="error-message"></div>
                         <div class="sent-message">Your message has been sent. Thank you!</div>
                     </div>
-                    <div ><button type="submit">Sign In</button></div>
+                    <div><button type="submit">Sign In</button></div>
                 </form>
             </div>
-            
+
 
         </div>
 
