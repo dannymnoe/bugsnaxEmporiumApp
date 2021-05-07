@@ -1,1 +1,130 @@
-{"Danny":{"slot0":{"img_link":"bugsnax/Aggroll_collection.webp","snakname":"Aggroll","slotAvailable":false},"slot1":{"img_link":"bugsnax/Big_Bopsicle_collection.webp","snakname":"Big Bopsicle","slotAvailable":false},"slot2":{"img_link":"bugsnax/cinnasnail_collection.webp","snakname":"Cinnasnail","slotAvailable":false},"slot3":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot4":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot5":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true}},"BungerAcc":{"slot0":{"img_link":"bugsnax/Aggroll_collection.webp","snakname":"Aggroll","slotAvailable":false},"slot1":{"img_link":"bugsnax/Big_Bopsicle_collection.webp","snakname":"Big Bopsicle","slotAvailable":false},"slot2":{"img_link":"bugsnax/cinnasnail_collection.webp","snakname":"Cinnasnail","slotAvailable":false},"slot3":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot4":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot5":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true}},"Bunger":{"slot0":{"img_link":"bugsnax/weenyworm_collection.webp","snakname":"Weenyworm","slotAvailable":false},"slot1":{"img_link":"bugsnax/Big_Bopsicle_collection.webp","snakname":"Big Bopsicle","slotAvailable":false},"slot2":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot3":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot4":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot5":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true}},"Nick":{"slot0":{"img_link":"bugsnax/weenyworm_collection.webp","snakname":"Weenyworm","slotAvailable":false},"slot1":{"img_link":"bugsnax/Big_Bopsicle_collection.webp","snakname":"Big Bopsicle","slotAvailable":false},"slot2":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot3":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot4":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true},"slot5":{"img_link":"bugsnax/empty_slot.png","snakname":"Not Populated","slotAvailable":true}}}
+{
+    "Danny": {
+        "slot0": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot1": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot2": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot3": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot4": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot5": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        }
+    },
+    "BungerAcc": {
+        "slot0": {
+            "img_link": "bugsnax/Aggroll_collection.webp",
+            "snakname": "Aggroll",
+            "slotAvailable": false
+        },
+        "slot1": {
+            "img_link": "bugsnax/Big_Bopsicle_collection.webp",
+            "snakname": "Big Bopsicle",
+            "slotAvailable": false
+        },
+        "slot2": {
+            "img_link": "bugsnax/cinnasnail_collection.webp",
+            "snakname": "Cinnasnail",
+            "slotAvailable": false
+        },
+        "slot3": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot4": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot5": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        }
+    },
+    "Bunger": {
+        "slot0": {
+            "img_link": "bugsnax/weenyworm_collection.webp",
+            "snakname": "Weenyworm",
+            "slotAvailable": false
+        },
+        "slot1": {
+            "img_link": "bugsnax/Big_Bopsicle_collection.webp",
+            "snakname": "Big Bopsicle",
+            "slotAvailable": false
+        },
+        "slot2": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot3": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot4": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot5": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        }
+    },
+    "Nick": {
+        "slot0": {
+            "img_link": "bugsnax/weenyworm_collection.webp",
+            "snakname": "Weenyworm",
+            "slotAvailable": false
+        },
+        "slot1": {
+            "img_link": "bugsnax/Big_Bopsicle_collection.webp",
+            "snakname": "Big Bopsicle",
+            "slotAvailable": false
+        },
+        "slot2": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot3": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot4": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        },
+        "slot5": {
+            "img_link": "bugsnax/empty_slot.png",
+            "snakname": "Not Populated",
+            "slotAvailable": true
+        }
+    }
+}
