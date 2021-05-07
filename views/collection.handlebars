@@ -1,89 +1,77 @@
-<!-- ======= Contact Section ======= -->
-<section id="contact" class="contact section-bg">
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section-bg">
+
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-            <p>{{{real_name}}}</p>
-            <p>{{{username}}}</p>
-            <p>{{{password}}}</p>
-            <p><a href="/logout">Log Out</a></p>
+            <h2>{{{real_name}}}'s Collection</h2>
+            <p>Welcome to your Collection {{{real_name}}}! Here you can look through all of the Bugsnax you've collected
+                so far!
+                You can also interact with your Bugsnax as well as add new ones to your collection!</p>
+            <button type="button" class="btn btn-block" style="background: #77BBC0;" onclick="empty_bag()">Empty
+                Bag</button>
+                <a href="/logout"><button type="button" class="btn btn-block" style="background: #77BBC0;">Log Out</button></a>
         </div>
-    </div>
-  </section><!-- End Contact Section -->
 
-  <br>
-  <hr>
-
-  <!-- ======= Services Section ======= -->
-  <section id="services" class="services section-bg">
-
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-title">
-          <h2>{{{real_name}}}'s Collection</h2>
-          <p>Welcome to your Collection {{{real_name}}}! Here you can look through all of the Bugsnax you've collected so far!
-                    You can also interact with your Bugsnax as well as add new ones to your collection!</p>
-      </div>
-
-      <div class="row gy-4">
+        <div class="row gy-4">
 
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-              <div class="icon-box iconbox-blue">
-                  <div class="icon">
-                      <img src={{{img_link0}}} alt="" class="img-fluid">
-                  </div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box iconbox-blue">
+                    <div class="icon">
+                        <img src={{{img_link0}}} alt="" class="img-fluid">
+                    </div>
                     <h4>{{{snak_name0}}}</h4>
-              </div>
-          </div>
+                </div>
+            </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
-              <div class="icon-box iconbox-orange">
-                  <div class="icon">
-                      <img src={{{img_link1}}} alt="" class="img-fluid">
-                  </div>
-                      <h4>{{{snak_name1}}}</h4>
-              </div>
-          </div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+                <div class="icon-box iconbox-orange">
+                    <div class="icon">
+                        <img src={{{img_link1}}} alt="" class="img-fluid">
+                    </div>
+                    <h4>{{{snak_name1}}}</h4>
+                </div>
+            </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
-              <div class="icon-box iconbox-pink">
-                  <div class="icon">
-                      <img src={{{img_link2}}} alt="" class="img-fluid">
-                  </div>
-                      <h4>{{{snak_name2}}}</h4>
-              </div>
-          </div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+                <div class="icon-box iconbox-pink">
+                    <div class="icon">
+                        <img src={{{img_link2}}} alt="" class="img-fluid">
+                    </div>
+                    <h4>{{{snak_name2}}}</h4>
+                </div>
+            </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-              <div class="icon-box iconbox-yellow">
-                  <div class="icon">
-                      <img src={{{img_link3}}} alt="" class="img-fluid">
-                  </div>
-                      <h4>{{{snak_name3}}}</h4>
-              </div>
-          </div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box iconbox-yellow">
+                    <div class="icon">
+                        <img src={{{img_link3}}} alt="" class="img-fluid">
+                    </div>
+                    <h4>{{{snak_name3}}}</h4>
+                </div>
+            </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
-              <div class="icon-box iconbox-red">
-                  <div class="icon">
-                      <img src={{{img_link4}}} alt="" class="img-fluid">
-                  </div>
-                      <h4>{{{snak_name4}}}</h4>
-              </div>
-          </div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+                <div class="icon-box iconbox-red">
+                    <div class="icon">
+                        <img src={{{img_link4}}} alt="" class="img-fluid">
+                    </div>
+                    <h4>{{{snak_name4}}}</h4>
+                </div>
+            </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
-              <div class="icon-box iconbox-teal">
-                  <div class="icon">
-                      <img src={{{img_link5}}} alt="" class="img-fluid">
-                  </div>
-                      <h4>{{{snak_name5}}}</h4>
-              </div>
-          </div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+                <div class="icon-box iconbox-teal">
+                    <div class="icon">
+                        <img src={{{img_link5}}} alt="" class="img-fluid">
+                    </div>
+                    <h4>{{{snak_name5}}}</h4>
+                </div>
+            </div>
 
-      </div>
+        </div>
 
     </div>
 
-  </section><!-- End Services Section -->
+</section><!-- End Services Section -->

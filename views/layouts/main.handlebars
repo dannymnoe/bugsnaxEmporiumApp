@@ -172,8 +172,34 @@
                 })
                 .catch(function(err) {
                     console.info(err + " url: " + url);
-                });
-                
+                }); 
+        }
+    </script>
+    <script>
+        function empty_bag() {
+            const options = {
+                method: 'POST',
+                redirect: 'follow',
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            };
+            fetch('/empty_bag', options)
+                .then(response => {
+                    // HTTP 301 response
+                    console.log(response)
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    }
+                })
+                .catch(function(err) {
+                    console.info(err + " url: " + url);
+                }); 
+        }
+    </script>
+    <script>
+        function bagFull(){
+            alert("Your bag is full of Bugsnax!");
         }
     </script>
 </body>
