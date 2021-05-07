@@ -35,24 +35,13 @@ app.set('view engine', 'handlebars');
 //Define our port #
 const PORT = process.env.PORT || 5000;
 
-const connection = mysql.createConnection({
+const connection_pool = mysql.createPool({
     host: '192.185.2.183',
     database: 'ntansino_snakbook_login',
     user: 'ntansino_admin1',
     password: 'basedPassword69',
     port: '3306'
 });
-
-connection.connect(function (err) {
-    if (err) {
-        console.log("Connection Error: " + err);
-    }
-    else {
-        console.log("Connection Successful");
-    }
-});
-
-//var Bugsnak_collection_json = require("./Bugsnak_collections");
 
 function fresh_new_bag() {
     return {
@@ -104,7 +93,7 @@ app.get('/snakbook', function (req, res) {
 app.get('/collection', function (req, res) {
 
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
-    connection.query(sql, function (err, result) {
+    connection_pool.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length == 0) {
             res.redirect('/login');
@@ -141,7 +130,7 @@ app.get('/collection', function (req, res) {
 app.get('/login', function (req, res) {
 
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
-    connection.query(sql, function (err, result) {
+    connection_pool.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length == 0) {
             res.render('login', { title: 'Sign In / Log In' });
@@ -177,7 +166,7 @@ app.post('/tryRegister', function (req, res) {
 
     sql_username_query = "SELECT * FROM user_auth WHERE username='" + reg_json.username_register + "'";
 
-    connection.query(sql_username_query, function (err, result) {
+    connection_pool.query(sql_username_query, function (err, result) {
         if (result.length == 0) {
             // The username does not already exist so create new account
             var Bugsnak_collection_json = require("./Bugsnak_collections");
@@ -186,7 +175,7 @@ app.post('/tryRegister', function (req, res) {
             let collect_str = JSON.stringify(Bugsnak_collection_json);
             fs.writeFileSync('./Bugsnak_collections.json', collect_str);
 
-            connection.query(sql, function (err, result) {
+            connection_pool.query(sql, function (err, result) {
                 if (err) throw err;
                 res.redirect('collection');
             });
@@ -208,7 +197,7 @@ app.post('/tryLogIn', function (req, res) {
 
     var sql = "SELECT * FROM user_auth WHERE username='" + reg_json.username_login + "'";
 
-    connection.query(sql, function (err, result) {
+    connection_pool.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length == 0) {
             res.render('redirect', { title: 'Username Not Registered', msg: 'The username you entered is has not yet been registered.' });
@@ -219,7 +208,7 @@ app.post('/tryLogIn', function (req, res) {
         }
         else {
             sql_update = "UPDATE user_auth SET sessionID = '" + req.session.id + "' WHERE username = '" + reg_json.username_login + "'";
-            connection.query(sql_update, function (err, result) {
+            connection_pool.query(sql_update, function (err, result) {
                 if (err) throw err;
                 else {
                     res.redirect('/collection');
@@ -262,7 +251,7 @@ app.post('/addSnak', function (req, res) {
 
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
 
-    connection.query(sql, function (err, result) {
+    connection_pool.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length == 0) {
 
@@ -328,7 +317,7 @@ app.post('/empty_bag', function (req, res) {
 
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
 
-    connection.query(sql, function (err, result) {
+    connection_pool.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length == 0) {
             return res.redirect('/login');
