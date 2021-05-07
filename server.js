@@ -52,6 +52,41 @@ connection.connect(function (err) {
     }
 });
 
+//var Bugsnak_collection_json = require("./Bugsnak_collections");
+
+const new_bag = {
+    "slot0": {
+        "img_link": "bugsnax/empty_slot.png",
+        "snakname": "Not Populated",
+        "slotAvailable": true
+    },
+    "slot1": {
+        "img_link": "bugsnax/empty_slot.png",
+        "snakname": "Not Populated",
+        "slotAvailable": true
+    },
+    "slot2": {
+        "img_link": "bugsnax/empty_slot.png",
+        "snakname": "Not Populated",
+        "slotAvailable": true
+    },
+    "slot3": {
+        "img_link": "bugsnax/empty_slot.png",
+        "snakname": "Not Populated",
+        "slotAvailable": true
+    },
+    "slot4": {
+        "img_link": "bugsnax/empty_slot.png",
+        "snakname": "Not Populated",
+        "slotAvailable": true
+    },
+    "slot5": {
+        "img_link": "bugsnax/empty_slot.png",
+        "snakname": "Not Populated",
+        "slotAvailable": true
+    }
+};
+
 app.get('/', function (req, res) {
     res.render('index', { title: 'Home' });
 });
@@ -67,7 +102,7 @@ app.get('/snakbook', function (req, res) {
 app.get('/collection', function (req, res) {
     //res.render('collection', {title: 'Collection'});
 
-    console.log(req.session.id);
+    //console.log(req.session.id);
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
     connection.query(sql, function (err, result) {
         if (err) throw err;
@@ -75,18 +110,12 @@ app.get('/collection', function (req, res) {
             res.redirect('/login');
         }
         else {
-            const fs = require("fs");
-            // fs.readFile("Bugsnak_collections.json", function(err, data) {
-            //     if (err) throw err;
-            //     const Bugsnak_collection_json = JSON.parse(data);
-            //     console.log(Bugsnak_collection_json);
-            //     console.log(Bugsnak_collection_json.result[0].username);
 
+            // console.log(Bugsnak_collection_json);
+            // console.log(Bugsnak_collection_json[result[0].username]);
 
-            // });
-            const Bugsnak_collection_json = require("./Bugsnak_collections")
-            console.log(Bugsnak_collection_json);
-            console.log(Bugsnak_collection_json[result[0].username]);
+            var Bugsnak_collection_json = require("./Bugsnak_collections");
+
             var user_collection = Bugsnak_collection_json[result[0].username];
 
             res.render('collection', {
@@ -133,6 +162,10 @@ app.get('/logout', function (req, res) {
     res.redirect('/');
 });
 
+app.get('/bagfull', function (req, res) {
+    res.render('bagfull', {title: 'Bag is Full!'});
+});
+
 app.post('/tryRegister', function (req, res) {
     const reg_json = req.body;
     console.log(reg_json);
@@ -151,6 +184,12 @@ app.post('/tryRegister', function (req, res) {
     connection.query(sql_username_query, function (err, result) {
         if (result.length == 0) {
             // The username does not already exist so create new account
+            var Bugsnak_collection_json = require("./Bugsnak_collections");
+            Bugsnak_collection_json[reg_json.username_register] = new_bag;
+            const fs = require("fs");
+            let collect_str = JSON.stringify(Bugsnak_collection_json);
+            fs.writeFileSync('./Bugsnak_collections.json', collect_str);
+
             connection.query(sql, function (err, result) {
                 if (err) throw err;
                 res.redirect('collection');
@@ -196,12 +235,6 @@ app.post('/tryLogIn', function (req, res) {
                     console.log("SID in app post /profile : " + req.session.id + " username: " + reg_json.username_login);
                 }
             });
-            //res.render('profile', {title: 'Profile - Lab 10', name: result[0].actual_name, username: result[0].username, password: result[0].password});
-            // res.render('collection', {title: 'Registered', 
-            //     real_name : result[0].name, 
-            //     username : result[0].username,
-            //     password: result[0].password});
-            // ^ Will probably become a direct
             res.redirect('/collection');
 
         }
@@ -210,6 +243,9 @@ app.post('/tryLogIn', function (req, res) {
 });
 
 function find_empty_slot(user_collection) {
+    // Given a user_collection JSON object
+    // Return the empty slot as a str, if available
+    // Returns "full" if the user's bag is full
     var empty_slot = "full";
     console.log("You are in find_empty_slot");
     var found_slot = false;
@@ -226,11 +262,19 @@ function find_empty_slot(user_collection) {
     return empty_slot;
 }
 
-app.post('/addSnak', function(req, res){
-    const reqBODY = req.body;
-    console.log(reqBODY);
+var new_slot = {}
+
+app.post('/addSnak', function (req, res) {
+    //new_slot = req.body;
+    new_slot = {
+        "img_link": req.body.img_path,
+        "snakname": req.body.snak_id,
+        "slotAvailable": false
+    };
+    console.log(new_slot);
 
     var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
+
     connection.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length == 0) {
@@ -238,16 +282,50 @@ app.post('/addSnak', function(req, res){
             return res.redirect('/login');
         }
         else {
-            
-            const Bugsnak_collection_json = require("./Bugsnak_collections")
-            //console.log(Bugsnak_collection_json);
-            //console.log(Bugsnak_collection_json[result[0].username]);
+            var Bugsnak_collection_json = require("./Bugsnak_collections");
             var user_collection = Bugsnak_collection_json[result[0].username];
             var empty_slot = find_empty_slot(user_collection);
+            if (empty_slot == "full") {
+                console.log("Inventory is full");
+                res.redirect('/bagfull');
+            }
+            else {
+                console.log("Space available");
+                console.log(user_collection[empty_slot]);
+                user_collection[empty_slot] = new_slot;
+                console.log(user_collection[empty_slot]);
+
+                const fs = require("fs");
+                let collect_str = JSON.stringify(Bugsnak_collection_json);
+                fs.writeFileSync('./Bugsnak_collections.json', collect_str);
+                res.redirect('/collection');
+            }
+
+        }
+    });
+
+});
+
+app.post('/empty_bag', function (req, res) {
+
+    var sql = "SELECT * FROM user_auth WHERE sessionID='" + req.session.id + "'";
+
+    connection.query(sql, function (err, result) {
+        if (err) throw err;
+        if (result.length == 0) {
+            return res.redirect('/login');
+        }
+        else {
+            var Bugsnak_collection_json = require("./Bugsnak_collections");
+            console.log(Bugsnak_collection_json[result[0].username])
+            Bugsnak_collection_json[result[0].username] = new_bag;
+            console.log(Bugsnak_collection_json[result[0].username])
+            const fs = require("fs");
+            let collect_str = JSON.stringify(Bugsnak_collection_json);
+            fs.writeFileSync('./Bugsnak_collections.json', collect_str);
             res.redirect('/collection');
         }
     });
-    
 });
 
 app.listen(PORT, function () {
